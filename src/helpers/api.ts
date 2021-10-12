@@ -1,12 +1,10 @@
 import axios, { AxiosResponse } from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-//Models
 import { IApiResponse } from "../models/shared/IApiResponse";
 import { ILogin } from "../models/ILogin";
+import { IArticulo } from '../models/IArticulo';
 
 //URL AP
-//axios.defaults.baseURL = "http://172.40.20.181:8094/api";
-axios.defaults.baseURL = "https://noemi-backend.herokuapp.com/api";
+axios.defaults.baseURL = "http://172.40.20.181:8094/api";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -38,12 +36,8 @@ const fetchAuth = {
 
 //Entrada Endpoints
 const fetchConsultaArticulos = {
-  get: (barCode: string): Promise<IApiResponse> =>
+  get: (barCode: string): Promise<IArticulo> =>
     requests.get(`/ConsultaArticulos/${barCode}`),
 };
 
-const fetchProducts = {
-  getAll: (): Promise<AxiosResponse> => requests.get(`/products`),
-};
-
-export { fetchConsultaArticulos, fetchProducts };
+export { fetchConsultaArticulos };

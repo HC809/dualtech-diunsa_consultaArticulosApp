@@ -9,6 +9,7 @@ import { THEME_LIGHT } from "./src/constants/shared";
 import { RootState } from "./src/store/store";
 import AppNavigator from "./src/navigation/AppNavigator";
 import { SyncIndicator } from "./src/components/shared/SyncIndicator";
+import FlashMessage from "react-native-flash-message";
 
 const AppConnected = () => {
   const theme: string = useSelector(
@@ -27,8 +28,9 @@ const AppConnected = () => {
       >
         <SafeAreaProvider>
           <>
-          <SyncIndicator />
+            <SyncIndicator />
             <AppNavigator />
+            <FlashMessage position="top" />
           </>
         </SafeAreaProvider>
       </ApplicationProvider>

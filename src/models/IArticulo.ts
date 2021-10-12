@@ -3,7 +3,7 @@ export interface IArticulo {
   descripcion: string;
   precio: number;
   precioConIsv: number;
-  precioOferta: number;
-  precioOfertaConIsv: number;
-  imagenUrl: string;
+  precioOferta: number | null;
+  precioOfertaConIsv: number | null;
+  imagenUrl: string | null;
 }

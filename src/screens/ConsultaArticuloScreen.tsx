@@ -17,9 +17,11 @@ import { styles } from "../theme/appTheme";
 import { IConsultaArticulo } from "../models/IConsultaArticulo";
 import { IArticulo } from "../models/IArticulo";
 import { View, Image } from "react-native";
-import articuloTest from "../data/artituloTest";
+import { showMessage } from "react-native-flash-message";
 import { trackPromise } from "react-promise-tracker";
 import { addZeroes } from "../helpers/functions/shared";
+import { fetchConsultaArticulos } from "../helpers/api";
+import { AxiosError } from "axios";
 
 interface Props extends DrawerScreenProps<any, any> {}
 
@@ -40,12 +42,11 @@ export const ConsultaArticuloScreen = ({ navigation }: Props) => {
       .max(50, "Ingrese máximo 25 caracteres."),
   });
 
-  const testApiCall = async () => {
-    const setTimeoutPromise = (timeout: number) => {
-      return new Promise((resolve) => setTimeout(resolve, timeout));
-    };
-    await setTimeoutPromise(3000);
-    return 100;
+  const consultarArticulo = async (codigoBarra: string) => {
+    var response = await fetchConsultaArticulos.get(codigoBarra);
+    if (response) {
+      setArticulo(response);
+    }
   };
 
   const {
@@ -61,15 +62,50 @@ export const ConsultaArticuloScreen = ({ navigation }: Props) => {
     initialValues: initialValues,
     onSubmit: async (model: IConsultaArticulo) => {
       try {
-        setLoading(true);
-        await trackPromise(
-          testApiCall().then((result) => {
-            setArticulo(articuloTest);
-          })
-        );
+        await trackPromise(consultarArticulo(model.codigoBarra));
       } catch (error) {
-      } finally {
-        setLoading(false);
+        const err = error as AxiosError;
+        if (err.response) {
+          var statusCode = err.response.status;
+          var errorMsg = err.response.data.error;
+          switch (statusCode) {
+            case 500:
+              showMessage({
+                message: errorMsg,
+                description: `Error: ${statusCode}`,
+                type: "danger",
+                animated: true,
+                floating: true,
+                icon: "danger",
+                duration: 5000,
+              });
+              break;
+
+            case 404:
+              showMessage({
+                message: `No se encontro artículo con código de barra ${model.codigoBarra}`,
+                description: `Error: ${statusCode}`,
+                type: "warning",
+                animated: true,
+                floating: true,
+                icon: "warning",
+                duration: 5000,
+              });
+              break;
+
+            default:
+              showMessage({
+                message: errorMsg ?? "",
+                description: `Error desconocido`,
+                type: "danger",
+                animated: true,
+                floating: true,
+                icon: "danger",
+                duration: 5000,
+              });
+              break;
+          }
+        }
       }
     },
     validationSchema: entradaValidationSchema,
@@ -97,7 +133,7 @@ export const ConsultaArticuloScreen = ({ navigation }: Props) => {
         style={styles.logo}
         source={require("../../assets/diunsa_logo.png")}
       />
-      <Text category="h6">Consulta de Articulos</Text>
+      <Text category="h6">Consulta de Artículo</Text>
     </View>
   );
 
@@ -156,7 +192,7 @@ export const ConsultaArticuloScreen = ({ navigation }: Props) => {
                   style={{ marginTop: 20, marginHorizontal: 20 }}
                   footer={titleFooter}
                 >
-                  <Text category="h5">{articulo?.descripcion}</Text>
+                  <Text category="h6">{articulo?.descripcion}</Text>
                 </Card>
               </View>
 
@@ -199,7 +235,7 @@ export const ConsultaArticuloScreen = ({ navigation }: Props) => {
                     footer={precioOfertaFooter}
                   >
                     <Text category="h5" status="danger">
-                      {addZeroes(articulo?.precioOfertaConIsv)}
+                      {addZeroes(articulo?.precioOferta ?? 0)}
                     </Text>
                   </Card>
                 </View>
