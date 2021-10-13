@@ -13,18 +13,7 @@ export const SyncIndicator = (props: any) => {
   return (
     <>
       {promiseInProgress === true ? (
-        <Modal
-          backdropStyle={styles.backdrop}
-          onBackdropPress={() => {}}
-          visible={true}
-        >
-          <View style={styles.content}>
-            <Text category="h5" style={{ color: "white", marginBottom: 15 }}>
-              Buscando articulo..
-            </Text>
-            {spinners()}
-          </View>
-        </Modal>
+        <View style={styles.content}>{spinners()}</View>
       ) : (
         <></>
       )}

@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { IApiResponse } from "../models/shared/IApiResponse";
 import { ILogin } from "../models/ILogin";
-import { IArticulo } from '../models/IArticulo';
+import { IArticulo } from "../models/IArticulo";
 
 //URL AP
 axios.defaults.baseURL = "http://172.40.20.181:8094/api";
@@ -32,12 +32,14 @@ const fetchAuth = {
       Username: model.username,
       Password: model.password,
     }),
+  // getStores: (): Promise<IStoreModel[]> =>
+  // requests.get("http://172.40.20.181:7011/api/store/getstorebyuser"),
 };
 
 //Entrada Endpoints
 const fetchConsultaArticulos = {
-  get: (barCode: string): Promise<IArticulo> =>
-    requests.get(`/ConsultaArticulos/${barCode}`),
+  get: (barCode: string, macAddress: string): Promise<IArticulo> =>
+    requests.get(`/ConsultaArticulos/${barCode}/${macAddress}`),
 };
 
 export { fetchConsultaArticulos };

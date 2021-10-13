@@ -27,8 +27,7 @@ const AppConnected = () => {
         }
       >
         <SafeAreaProvider>
-          <>
-            <SyncIndicator />
+          <>        
             <AppNavigator />
             <FlashMessage position="top" />
           </>

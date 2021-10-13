@@ -1,9 +1,11 @@
 export interface IArticulo {
   codigoArticulo: string;
   descripcion: string;
-  precio: number;
-  precioConIsv: number;
-  precioOferta: number | null;
-  precioOfertaConIsv: number | null;
+  precioNormal: number;
+  precioOferta: number ;
+  precioAhorroMas: number ;
+  precioCrediDiunsa: number ;
+  cuotaCrediDiunsaNormal: number;
+  cuotaCrediDiunsaVIP: number ;
   imagenUrl: string | null;
 }
