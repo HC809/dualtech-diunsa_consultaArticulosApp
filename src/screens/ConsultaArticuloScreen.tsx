@@ -71,12 +71,11 @@ export const ConsultaArticuloScreen = ({}: Props) => {
       try {
         setArticulo(null);
         setLoading(true);
-        // await trackPromise(
-        //   consultarArticulo(model.codigoBarra).then((artResponse) => {
-        //     setArticulo(artResponse);
-        //   })
-        // );
-        setArticulo(articuloTest);
+        await trackPromise(
+          consultarArticulo(model.codigoBarra).then((artResponse) => {
+            setArticulo(artResponse);
+          })
+        );
       } catch (error) {
         const err = error as AxiosError;
         if (err.response) {
@@ -145,26 +144,27 @@ export const ConsultaArticuloScreen = ({}: Props) => {
   });
 
   const renderRightActions = () => (
-    <View style={{ flexDirection: "row" }}>
-      <Button
-        size="small"
-        appearance="outline"
-        onPress={() => {
-          setArticulo(null);
-          resetForm();
-        }}
-        disabled={loading}
-      >
-        Limpiar
-      </Button>
-      <Button
-        size="small"
-        onPress={handleSubmit as (values: any) => void}
-        disabled={loading}
-      >
-        Consultar
-      </Button>
-    </View>
+    <></>
+    // <View style={{ flexDirection: "row" }}>
+    //   <Button
+    //     size="small"
+    //     appearance="outline"
+    //     onPress={() => {
+    //       setArticulo(null);
+    //       resetForm();
+    //     }}
+    //     disabled={loading}
+    //   >
+    //     Limpiar
+    //   </Button>
+    //   <Button
+    //     size="small"
+    //     onPress={handleSubmit as (values: any) => void}
+    //     disabled={loading}
+    //   >
+    //     Consultar
+    //   </Button>
+    // </View>
   );
 
   const renderTitle = () => (
@@ -175,7 +175,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
         style={styles.logo}
         source={require("../../assets/diunsa_logo.png")}
       />
-      <Text category="h6">Consulta de Artículo</Text>
+      <TopNavigation title="Consulta de Artículos" subtitle="V 18.10.2021" />
     </View>
   );
 
@@ -293,9 +293,9 @@ export const ConsultaArticuloScreen = ({}: Props) => {
               {!articulo?.imagenUrl ? (
                 <View style={{ alignItems: "center" }}>
                   <Image
-                    source={require("../../assets/contenido-no-disponible.jpg")}
+                    source={require("../../assets/nopic.png")}
                     style={{
-                      height: 350,
+                      height: 225,
                       resizeMode: "center",
                     }}
                   />
@@ -326,15 +326,18 @@ export const ConsultaArticuloScreen = ({}: Props) => {
                 },
               ]}
             >
-             {articulo?.precioAhorroMas !== 0 && (
+              {articulo?.precioAhorroMas !== 0 && (
                 <View style={{ flex: 1 }}>
-                <Card style={{ marginTop: 10 }} footer={precioAhorroMasFooter}>
-                  <Text category="h5" status="primary">
-                    {addZeroes(articulo?.precioAhorroMas ?? 0)}
-                  </Text>
-                </Card>
-              </View>
-             )}
+                  <Card
+                    style={{ marginTop: 10 }}
+                    footer={precioAhorroMasFooter}
+                  >
+                    <Text category="h5" status="primary">
+                      {addZeroes(articulo?.precioAhorroMas ?? 0)}
+                    </Text>
+                  </Card>
+                </View>
+              )}
               <View style={{ flex: 1 }}>
                 <Card
                   style={{ marginTop: 10, marginHorizontal: 5 }}
