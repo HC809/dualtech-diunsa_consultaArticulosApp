@@ -2,7 +2,7 @@ import { IArticulo } from "../models/IArticulo";
 
 const articuloTest: IArticulo = {
   codigoArticulo: "01002022",
-  descripcion: 'COM. PORTATIL HP 240 G7/14"/CI3-1005G1/8GB/1TB',
+  descripcion: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
   precioNormal: 20990,
   precioOferta: 15990,
   precioAhorroMas: 0,

@@ -16,7 +16,7 @@ import {
 import { styles } from "../theme/appTheme";
 import { IConsultaArticulo } from "../models/IConsultaArticulo";
 import { IArticulo } from "../models/IArticulo";
-import { View, Image, Keyboard } from "react-native";
+import { View, Image } from "react-native";
 import { showMessage } from "react-native-flash-message";
 import { trackPromise } from "react-promise-tracker";
 import { addZeroes } from "../helpers/functions/shared";
@@ -24,6 +24,7 @@ import { fetchConsultaArticulos } from "../helpers/api";
 import { AxiosError } from "axios";
 import * as Device from "expo-device";
 import { SyncIndicator } from "../components/shared/SyncIndicator";
+import articuloTest from "../data/artituloTest";
 
 interface Props extends DrawerScreenProps<any, any> {}
 
@@ -45,15 +46,11 @@ export const ConsultaArticuloScreen = ({}: Props) => {
   }, []);
 
   const entradaValidationSchema: Yup.SchemaOf<IConsultaArticulo> = Yup.object({
-    codigoBarra: Yup.string()
-      .required("Escanee el código de barra.")
-      // .min(3, "Ingrese mínimo 2 caracteres.")
-      // .max(50, "Ingrese máximo 25 caracteres."),
+    codigoBarra: Yup.string().required("Escanee el código de barra."),
   });
 
   const consultarArticulo = async (codigoBarra: string): Promise<IArticulo> => {
     var macAddress = Device.deviceName ?? "";
-    //var regexMac = /^((([0-9A-F]{2}:){5})|(([0-9A-F]{2}-){5})|([0-9A-F]{10}))([0-9A-F]{2})$/i
     var response = await fetchConsultaArticulos.get(codigoBarra, macAddress);
 
     return response;
@@ -74,11 +71,12 @@ export const ConsultaArticuloScreen = ({}: Props) => {
       try {
         setArticulo(null);
         setLoading(true);
-        await trackPromise(
-          consultarArticulo(model.codigoBarra).then((artResponse) => {
-            setArticulo(artResponse);
-          })
-        );
+        // await trackPromise(
+        //   consultarArticulo(model.codigoBarra).then((artResponse) => {
+        //     setArticulo(artResponse);
+        //   })
+        // );
+        setArticulo(articuloTest);
       } catch (error) {
         const err = error as AxiosError;
         if (err.response) {
@@ -246,7 +244,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
         )}
       </Layout>
 
-      <Layout level="4" style={styles.flex}>
+      <Layout level={articulo ? "4" : "1"} style={styles.flex}>
         <SyncIndicator />
         {articulo ? (
           <View>
@@ -261,7 +259,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
             >
               <View style={{ width: "50%" }}>
                 <Card style={{ marginTop: 10 }} footer={titleFooter}>
-                  <Text category="h6">{articulo?.descripcion}</Text>
+                  <Text category="s1">{articulo?.descripcion}</Text>
                 </Card>
               </View>
               <View style={{ flex: 1 }}>
@@ -307,10 +305,17 @@ export const ConsultaArticuloScreen = ({}: Props) => {
                   source={{
                     uri: articulo?.imagenUrl,
                   }}
-                  style={{ height: 250, resizeMode: "center" }}
+                  style={{
+                    height: articulo.descripcion.length > 42 ? 200 : 225,
+                    resizeMode: "center",
+                  }}
                 />
               )}
             </Card>
+
+            <Text category="s1" style={{ textAlign: "center", marginTop: 5 }}>
+              Las cuotas de CrediDiunsa son a 36 meses.
+            </Text>
 
             <View
               style={[
@@ -321,23 +326,26 @@ export const ConsultaArticuloScreen = ({}: Props) => {
                 },
               ]}
             >
-              <View style={{ flex: 1 }}>
-                <Card
-                  style={{ marginTop: 10, marginLeft: 5 }}
-                  footer={precioAhorroMasFooter}
-                >
+             {articulo?.precioAhorroMas !== 0 && (
+                <View style={{ flex: 1 }}>
+                <Card style={{ marginTop: 10 }} footer={precioAhorroMasFooter}>
                   <Text category="h5" status="primary">
                     {addZeroes(articulo?.precioAhorroMas ?? 0)}
                   </Text>
                 </Card>
               </View>
+             )}
               <View style={{ flex: 1 }}>
                 <Card
                   style={{ marginTop: 10, marginHorizontal: 5 }}
                   footer={precioCrediDiunsaFooter}
                 >
                   <Text category="h5" style={{ color: "#ff8c00" }}>
-                    {addZeroes(articulo?.precioCrediDiunsa)}
+                    {addZeroes(
+                      articulo?.precioCrediDiunsa === 0
+                        ? articulo?.precioOferta
+                        : articulo?.precioCrediDiunsa
+                    )}
                   </Text>
                 </Card>
               </View>
@@ -353,7 +361,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
               </View>
               <View style={{ flex: 1 }}>
                 <Card
-                  style={{ marginTop: 10, marginHorizontal: 5 }}
+                  style={{ marginTop: 10 }}
                   footer={cuotaCrediDiunsaVIPFooter}
                 >
                   <Text category="h5" style={{ color: "#efb810" }}>
@@ -368,7 +376,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
           </View>
         ) : (
           !loading ?? (
-            <Text category="h6" style={{ textAlign: "center", marginTop: 10 }}>
+            <Text category="h6" style={{ textAlign: "center", marginTop: 5 }}>
               Debe escanear o ingresar el código de barra.
             </Text>
           )

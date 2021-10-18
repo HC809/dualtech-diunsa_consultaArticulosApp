@@ -8,7 +8,6 @@ import { default as customtheme } from "./customtheme.json";
 import { THEME_LIGHT } from "./src/constants/shared";
 import { RootState } from "./src/store/store";
 import AppNavigator from "./src/navigation/AppNavigator";
-import { SyncIndicator } from "./src/components/shared/SyncIndicator";
 import FlashMessage from "react-native-flash-message";
 
 const AppConnected = () => {

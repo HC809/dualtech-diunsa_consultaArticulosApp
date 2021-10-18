@@ -32,8 +32,6 @@ const fetchAuth = {
       Username: model.username,
       Password: model.password,
     }),
-  // getStores: (): Promise<IStoreModel[]> =>
-  // requests.get("http://172.40.20.181:7011/api/store/getstorebyuser"),
 };
 
 //Entrada Endpoints
