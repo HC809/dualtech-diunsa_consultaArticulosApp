@@ -175,7 +175,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
         style={styles.logo}
         source={require("../../assets/diunsa_logo.png")}
       />
-      <TopNavigation title="Consulta de Artículos" subtitle="V 18.10.2021" />
+      <TopNavigation title="Consulta de Artículos" subtitle="V 06.11.2021" />
     </View>
   );
 
