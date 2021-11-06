@@ -8,18 +8,13 @@ axios.defaults.baseURL = "http://172.40.20.181:8094/api";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
-// axios.interceptors.request.use(async (config) => {
-//   const token = await AsyncStorage.getItem("token");
-//   if (token) {
-//     config.headers = {
-//       Authorization: `Bearer ${token}`,
-//     };
-//   }
-//   return config;
-// });
+const headers = {
+  "Content-Type": "application/json",
+  'ApiKey': "D!uNs@20214e6ec9740efe4310b665C0nsult@rt!cul0sK3Yrrgtsd3456543Dd",
+};
 
 const requests = {
-  get: (url: string) => axios.get(url).then(responseBody),
+  get: (url: string) => axios.get(url, { headers }).then(responseBody),
   post: (url: string, body: {}) => axios.post(url, body).then(responseBody),
   put: (url: string, body: {}) => axios.put(url, body).then(responseBody),
   del: (url: string) => axios.delete(url).then(responseBody),
