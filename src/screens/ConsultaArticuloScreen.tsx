@@ -56,6 +56,14 @@ export const ConsultaArticuloScreen = ({}: Props) => {
     return response;
   };
 
+  // const consultarArticulo = async () => {
+  //   const setTimeoutPromise = (timeout: number) => {
+  //     return new Promise((resolve) => setTimeout(resolve, timeout));
+  //   };
+  //   await setTimeoutPromise(3000);
+  //   return Promise.resolve(articuloTest);
+  // };
+
   const {
     handleSubmit,
     handleChange,
@@ -138,6 +146,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
       } finally {
         setLoading(false);
         setFieldValue(CODIGO_BARRA, "");
+        codigoBarraInput.current!.focus();
       }
     },
     validationSchema: entradaValidationSchema,
@@ -175,7 +184,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
         style={styles.logo}
         source={require("../../assets/diunsa_logo.png")}
       />
-      <TopNavigation title="Consulta de Artículos" subtitle="V 06.11.2021" />
+      <TopNavigation title="Consulta de Artículos" subtitle="V 26.11.2021" />
     </View>
   );
 
