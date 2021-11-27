@@ -142,6 +142,16 @@ export const ConsultaArticuloScreen = ({}: Props) => {
               });
               break;
           }
+        } else {
+          showMessage({
+            message: "Error de conexión al API.",
+            description: "NETWORK ERROR",
+            type: "danger",
+            animated: true,
+            floating: true,
+            icon: "danger",
+            duration: 5000,
+          });
         }
       } finally {
         setLoading(false);
@@ -189,19 +199,19 @@ export const ConsultaArticuloScreen = ({}: Props) => {
   );
 
   const titleFooter = () => (
-    <View style={{ paddingVertical: 10, paddingHorizontal: 25 }}>
+    <View style={{ paddingVertical: 5, paddingHorizontal: 25 }}>
       <Text appearance="hint">{`Cod. ${articulo?.codigoArticulo}`}</Text>
     </View>
   );
 
   const precioFooter = () => (
-    <View style={{ paddingVertical: 10, paddingHorizontal: 25 }}>
+    <View style={{ paddingVertical: 5, paddingHorizontal: 25 }}>
       <Text appearance="hint">Precio Normal</Text>
     </View>
   );
 
   const precioOfertaFooter = () => (
-    <View style={{ paddingVertical: 10, paddingHorizontal: 25 }}>
+    <View style={{ paddingVertical: 5, paddingHorizontal: 25 }}>
       <Text appearance="hint">Precio Oferta</Text>
     </View>
   );
@@ -267,26 +277,26 @@ export const ConsultaArticuloScreen = ({}: Props) => {
               ]}
             >
               <View style={{ width: "50%" }}>
-                <Card style={{ marginTop: 10 }} footer={titleFooter}>
+                <Card style={{ marginTop: 5 }} footer={titleFooter}>
                   <Text category="s1">{articulo?.descripcion}</Text>
                 </Card>
               </View>
               <View style={{ flex: 1 }}>
                 <Card
-                  style={{ marginTop: 10, marginHorizontal: 10 }}
+                  style={{ marginTop: 5, marginHorizontal: 10 }}
                   footer={precioFooter}
                 >
-                  <Text category="h6" status="basic">
+                  <Text category="s1" status="basic">
                     {addZeroes(articulo?.precioNormal)}
                   </Text>
                 </Card>
               </View>
               <View style={{ flex: 1 }}>
                 <Card
-                  style={{ marginTop: 10, marginHorizontal: 5 }}
+                  style={{ marginTop: 5, marginHorizontal: 0 }}
                   footer={precioOfertaFooter}
                 >
-                  <Text category="h6" status="danger">
+                  <Text category="s1" status="danger">
                     {addZeroes(articulo?.precioOferta)}
                   </Text>
                 </Card>
@@ -295,7 +305,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
 
             <Card
               style={{
-                marginTop: 10,
+                marginTop: 5,
                 marginHorizontal: 20,
               }}
             >
@@ -304,7 +314,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
                   <Image
                     source={require("../../assets/nopic.png")}
                     style={{
-                      height: 225,
+                      height: 180,
                       resizeMode: "center",
                     }}
                   />
@@ -315,14 +325,14 @@ export const ConsultaArticuloScreen = ({}: Props) => {
                     uri: articulo?.imagenUrl,
                   }}
                   style={{
-                    height: articulo.descripcion.length > 42 ? 200 : 225,
+                    height: articulo.descripcion.length > 42 ? 160 : 180,
                     resizeMode: "center",
                   }}
                 />
               )}
             </Card>
 
-            <Text category="s1" style={{ textAlign: "center", marginTop: 5 }}>
+            <Text category="s1" style={{ textAlign: "center", marginTop: 2 }}>
               Las cuotas de CrediDiunsa son a 36 meses.
             </Text>
 
@@ -337,11 +347,8 @@ export const ConsultaArticuloScreen = ({}: Props) => {
             >
               {articulo?.precioAhorroMas !== 0 && (
                 <View style={{ flex: 1 }}>
-                  <Card
-                    style={{ marginTop: 10 }}
-                    footer={precioAhorroMasFooter}
-                  >
-                    <Text category="h5" status="primary">
+                  <Card style={{ marginTop: 5 }} footer={precioAhorroMasFooter}>
+                    <Text category="s1" status="primary">
                       {addZeroes(articulo?.precioAhorroMas ?? 0)}
                     </Text>
                   </Card>
@@ -349,10 +356,10 @@ export const ConsultaArticuloScreen = ({}: Props) => {
               )}
               <View style={{ flex: 1 }}>
                 <Card
-                  style={{ marginTop: 10, marginHorizontal: 5 }}
+                  style={{ marginTop: 5, marginHorizontal: 5 }}
                   footer={precioCrediDiunsaFooter}
                 >
-                  <Text category="h5" style={{ color: "#ff8c00" }}>
+                  <Text category="s1" style={{ color: "#ff8c00" }}>
                     {addZeroes(
                       articulo?.precioCrediDiunsa === 0
                         ? articulo?.precioOferta
@@ -363,32 +370,32 @@ export const ConsultaArticuloScreen = ({}: Props) => {
               </View>
               <View style={{ flex: 1 }}>
                 <Card
-                  style={{ marginTop: 10, marginRight: 5 }}
+                  style={{ marginTop: 5, marginRight: 5 }}
                   footer={cuotaCrediDiunsaNormalFooter}
                 >
-                  <Text category="h5" style={{ color: "#E47D00" }}>
+                  <Text category="s1" style={{ color: "#E47D00" }}>
                     {addZeroes(articulo?.cuotaCrediDiunsaNormal)}
                   </Text>
                 </Card>
               </View>
               <View style={{ flex: 1 }}>
                 <Card
-                  style={{ marginTop: 10 }}
+                  style={{ marginTop: 5 }}
                   footer={cuotaCrediDiunsaVIPFooter}
                 >
-                  <Text category="h5" style={{ color: "#efb810" }}>
+                  <Text category="s1" style={{ color: "#efb810" }}>
                     {addZeroes(articulo?.cuotaCrediDiunsaVIP)}
                   </Text>
                 </Card>
               </View>
             </View>
-            <Text category="h6" style={{ textAlign: "center", marginTop: 10 }}>
+            <Text category="s1" style={{ textAlign: "center", marginTop: 5 }}>
               Todos los precios incluyen ISV
             </Text>
           </View>
         ) : (
           !loading ?? (
-            <Text category="h6" style={{ textAlign: "center", marginTop: 5 }}>
+            <Text category="s1" style={{ textAlign: "center", marginTop: 5 }}>
               Debe escanear o ingresar el código de barra.
             </Text>
           )

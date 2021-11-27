@@ -119,12 +119,12 @@ export const styles = StyleSheet.create({
   },
   titleContainer: {
     flexDirection: "row",
-    alignItems: "center",
+    //alignItems: "center",
 
   },
   logo: {
-    height : 60,
-    width: 140,
+    height : 40,
+    width: 100,
     resizeMode:"cover",
     marginHorizontal: 5,
   },
