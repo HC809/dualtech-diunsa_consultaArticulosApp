@@ -34,7 +34,7 @@ const initialValues: IConsultaArticulo = {
   codigoBarra: "",
 };
 
-export const ConsultaArticuloScreen = ({}: Props) => {
+export const ConsultaArticuloScreen = ({  }: Props) => {
   const [articulo, setArticulo] = useState<IArticulo | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -194,7 +194,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
         style={styles.logo}
         source={require("../../assets/diunsa_logo.png")}
       />
-      <TopNavigation title="Consulta de Artículos" subtitle="V 27.11.2021" />
+      <TopNavigation title="Consulta de Artículos" subtitle="V 03.12.2021" />
     </View>
   );
 
@@ -286,7 +286,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
                   style={{ marginTop: 5, marginHorizontal: 10 }}
                   footer={precioFooter}
                 >
-                  <Text category="s1" status="basic">
+                  <Text category="h6" status="basic">
                     {addZeroes(articulo?.precioNormal)}
                   </Text>
                 </Card>
@@ -296,7 +296,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
                   style={{ marginTop: 5, marginHorizontal: 0 }}
                   footer={precioOfertaFooter}
                 >
-                  <Text category="s1" status="danger">
+                  <Text category="h6" status="danger">
                     {addZeroes(articulo?.precioOferta)}
                   </Text>
                 </Card>
@@ -325,7 +325,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
                     uri: articulo?.imagenUrl,
                   }}
                   style={{
-                    height: articulo.descripcion.length > 42 ? 160 : 180,
+                    height: articulo.descripcion.length > 42 ? 180 : 200,
                     resizeMode: "center",
                   }}
                 />
@@ -348,7 +348,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
               {articulo?.precioAhorroMas !== 0 && (
                 <View style={{ flex: 1 }}>
                   <Card style={{ marginTop: 5 }} footer={precioAhorroMasFooter}>
-                    <Text category="s1" status="primary">
+                    <Text category="h6" status="primary">
                       {addZeroes(articulo?.precioAhorroMas ?? 0)}
                     </Text>
                   </Card>
@@ -359,7 +359,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
                   style={{ marginTop: 5, marginHorizontal: 5 }}
                   footer={precioCrediDiunsaFooter}
                 >
-                  <Text category="s1" style={{ color: "#ff8c00" }}>
+                  <Text category="h6" style={{ color: "#ff8c00" }}>
                     {addZeroes(
                       articulo?.precioCrediDiunsa === 0
                         ? articulo?.precioOferta
@@ -373,12 +373,12 @@ export const ConsultaArticuloScreen = ({}: Props) => {
                   style={{ marginTop: 5, marginRight: 5 }}
                   footer={cuotaCrediDiunsaNormalFooter}
                 >
-                  <Text category="s1" style={{ color: "#E47D00" }}>
+                  <Text category="h6" style={{ color: "#E47D00" }}>
                     {addZeroes(articulo?.cuotaCrediDiunsaNormal)}
                   </Text>
                 </Card>
               </View>
-              <View style={{ flex: 1 }}>
+              {/* <View style={{ flex: 1 }}>
                 <Card
                   style={{ marginTop: 5 }}
                   footer={cuotaCrediDiunsaVIPFooter}
@@ -387,7 +387,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
                     {addZeroes(articulo?.cuotaCrediDiunsaVIP)}
                   </Text>
                 </Card>
-              </View>
+              </View> */}
             </View>
             <Text category="s1" style={{ textAlign: "center", marginTop: 5 }}>
               Todos los precios incluyen ISV

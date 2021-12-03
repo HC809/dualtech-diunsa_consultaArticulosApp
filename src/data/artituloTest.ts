@@ -2,7 +2,7 @@ import { IArticulo } from "../models/IArticulo";
 
 const articuloTest: IArticulo = {
   codigoArticulo: "01002022",
-  descripcion: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+  descripcion: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
   precioNormal: 20990,
   precioOferta: 15990,
   precioAhorroMas: 0,

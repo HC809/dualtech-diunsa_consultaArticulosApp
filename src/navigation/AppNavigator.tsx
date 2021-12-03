@@ -68,7 +68,13 @@ const Tab = createBottomTabNavigator();
 // );
 
 const EntradaNavigator = () => (
-  <Stack.Navigator headerMode="none" initialRouteName={ENTRADAS_SCREEN}>
+  <Stack.Navigator
+    screenOptions={{
+      headerShown: false,
+    }}
+    headerMode="none"
+    initialRouteName={ENTRADAS_SCREEN}
+  >
     <Tab.Screen name={ENTRADAS_SCREEN} component={ConsultaArticuloScreen} />
   </Stack.Navigator>
 );
@@ -111,7 +117,7 @@ const AppNavigator = () => {
 
   return (
     <NavigationContainer>
-      <EntradaNavigator/>
+      <EntradaNavigator />
       {/* {authStatus === AUTH ? <MyDrawerNavigator /> : <AuthNavigator />} */}
     </NavigationContainer>
   );
