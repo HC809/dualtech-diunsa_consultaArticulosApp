@@ -34,7 +34,7 @@ const initialValues: IConsultaArticulo = {
   codigoBarra: "",
 };
 
-export const ConsultaArticuloScreen = ({  }: Props) => {
+export const ConsultaArticuloScreen = ({}: Props) => {
   const [articulo, setArticulo] = useState<IArticulo | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -224,13 +224,13 @@ export const ConsultaArticuloScreen = ({  }: Props) => {
 
   const precioCrediDiunsaFooter = () => (
     <View style={{ paddingVertical: 10, paddingHorizontal: 25 }}>
-      <Text appearance="hint">CrediDiunsa</Text>
+      <Text appearance="hint">Precio Credidiunsa</Text>
     </View>
   );
 
   const cuotaCrediDiunsaNormalFooter = () => (
     <View style={{ paddingVertical: 10, paddingHorizontal: 25 }}>
-      <Text appearance="hint">Cuota Normal</Text>
+      <Text appearance="hint">Cuota Credidiunsa</Text>
     </View>
   );
 
