@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Dispatch } from "redux";
 //Api
 //Models
@@ -16,6 +15,7 @@ import {
 } from "./authActionTypes";
 import { Alert } from "react-native";
 import { fetchAuth } from "../../../helpers/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const login = (token: string, username: string, name: string) => {
   return { type: LOGIN, payload: { token, username, name } };
