@@ -36,4 +36,4 @@ const fetchConsultaArticulos = {
     requests.get(`/ConsultaArticulos/${barCode}/${macAddress}`),
 };
 
-export { fetchConsultaArticulos };
+export { fetchConsultaArticulos, fetchAuth };

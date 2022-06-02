@@ -49,20 +49,20 @@ export const ConsultaArticuloScreen = ({}: Props) => {
     codigoBarra: Yup.string().required("Escanee el código de barra."),
   });
 
-  // const consultarArticulo = async (codigoBarra: string): Promise<IArticulo> => {
-  //   var macAddress = Device.deviceName ?? "";
-  //   var response = await fetchConsultaArticulos.get(codigoBarra, macAddress);
+  const consultarArticulo = async (codigoBarra: string): Promise<IArticulo> => {
+    var macAddress = Device.deviceName ?? "";
+    var response = await fetchConsultaArticulos.get(codigoBarra, macAddress);
 
-  //   return response;
-  // };
-
-  const consultarArticulo = async () => {
-    const setTimeoutPromise = (timeout: number) => {
-      return new Promise((resolve) => setTimeout(resolve, timeout));
-    };
-    await setTimeoutPromise(3000);
-    return Promise.resolve(articuloTest);
+    return response;
   };
+
+  // const consultarArticulo = async () => {
+  //   const setTimeoutPromise = (timeout: number) => {
+  //     return new Promise((resolve) => setTimeout(resolve, timeout));
+  //   };
+  //   await setTimeoutPromise(3000);
+  //   return Promise.resolve(articuloTest);
+  // };
 
   const {
     handleSubmit,
@@ -80,7 +80,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
         setArticulo(null);
         setLoading(true);
         await trackPromise(
-          consultarArticulo().then((artResponse) => {
+          consultarArticulo(model.codigoBarra).then((artResponse) => {
             setArticulo(artResponse);
           })
         );

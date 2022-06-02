@@ -1,7 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Dispatch } from "redux";
 //Api
-import { fetchAuth } from "../../../helpers/api";
 //Models
 import { IApiResponse } from "../../../models/shared/IApiResponse";
 import { ILogin } from "../../../models/ILogin";
@@ -16,6 +15,7 @@ import {
   LOGOUT,
 } from "./authActionTypes";
 import { Alert } from "react-native";
+import { fetchAuth } from "../../../helpers/api";
 
 const login = (token: string, username: string, name: string) => {
   return { type: LOGIN, payload: { token, username, name } };
