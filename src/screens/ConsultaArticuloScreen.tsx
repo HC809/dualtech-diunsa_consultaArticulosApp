@@ -163,7 +163,7 @@ export const ConsultaArticuloScreen = ({}: Props) => {
   });
 
   const renderRightActions = () => (
-    <></>
+    <Text appearance='hint'>V 02.06.2022</Text>
     // <View style={{ flexDirection: "row" }}>
     //   <Button
     //     size="small"
@@ -189,12 +189,11 @@ export const ConsultaArticuloScreen = ({}: Props) => {
   const renderTitle = () => (
     <View style={styles.titleContainer}>
       <Avatar
-        shape="rounded"
-        size="giant"
+        style={styles.logo}
+        size={"large"}
         style={styles.logo}
         source={require("../../assets/diunsa_logo.png")}
       />
-      <TopNavigation title="Consulta de Artículos" subtitle="V 02.06.2022" />
     </View>
   );
 

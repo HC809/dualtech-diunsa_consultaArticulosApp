@@ -4,7 +4,7 @@ import { ILogin } from "../models/ILogin";
 import { IArticulo } from "../models/IArticulo";
 
 //URL AP
-axios.defaults.baseURL = "https://localhost:44382/api"//"http://172.40.20.181:8094/api";
+axios.defaults.baseURL = "http://172.40.20.181:8094/api";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
